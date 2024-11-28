@@ -45,14 +45,6 @@
                             <option value="terisi" {{ isset($edit) && $edit->status == 'terisi' ? 'selected' : '' }}>Terisi</option>
                         </select>
                     </div>
-                    <div class="mb-6">
-                        <label for="nama_pelanggan" class="block mb-2 text-sm font-medium text-gray-300">Nama Pelanggan</label>
-                        <input type="text" id="nama_pelanggan" name="nama_pelanggan" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ isset($edit) ? $edit->nama_pelanggan : '' }}" required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="jumlah_pelanggan" class="block mb-2 text-sm font-medium text-gray-300">Jumlah Pelanggan</label>
-                        <input type="number" id="jumlah_pelanggan" name="jumlah_pelanggan" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ isset($edit) ? $edit->jumlah_pelanggan : '' }}" required>
-                    </div>
                     <button type="submit" class="text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full">
                         Simpan Meja
                     </button>
@@ -84,12 +76,6 @@
                                     <div class="font-semibold text-left">Kapasitas</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Nama Pelanggan</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Jumlah Pelanggan</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-center">Aksi</div>
                                 </th>
                             </tr>
@@ -108,12 +94,6 @@
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="text-left">{{$m->kapasitas}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$m->nama_pelanggan}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{$m->jumlah_pelanggan}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="text-center space-x-2">

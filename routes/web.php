@@ -27,6 +27,6 @@ Route::get('/entri_menu/delete/{id_menu}', [MenuController::class, 'delete_menu'
 
 Route::get('/entri_order', [OrderController::class, 'entri_order']);
 Route::post('/entri_order', [OrderController::class, 'store'])->name('store');
-Route::get('/entri_order/edit/{id_pesanan}', [OrderController::class, 'edit']);
-Route::post('/entri_order/edit/{id_pesanan}', [OrderController::class, 'update']);
+Route::get('/entri_order/edit/{id}', [OrderController::class, 'edit'])->name('entri_order.edit');
+Route::post('/entri_order/edit/{id}', [OrderController::class, 'update']);
 Route::get('/entri_order/delete/{id_pesanan}', [OrderController::class, 'delete']);

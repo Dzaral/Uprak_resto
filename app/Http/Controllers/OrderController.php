@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Pesanan;
 use App\Models\Menu;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-class OrderController extends Controller
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+
+class OrderController extends BaseController
 {
+    use AuthorizesRequests, ValidatesRequests;
+
+    public function __construct()
+    {
+        // Remove or comment out the auth middleware
+        // $this->middleware('auth');
+    }
+
     public function entri_order()
     {
         $pesanan = new Pesanan();
@@ -36,11 +49,15 @@ class OrderController extends Controller
         }
 
         $menu = Menu::all();
+        $pelanggan = DB::table('pelanggans')->get();
+        $meja = DB::table('mejas')->get();
 
         return view('entri_order', [
             'pesanan' => $data_pesanan,
             'id_pesanan' => $no,
-            'menu' => $menu
+            'menu' => $menu,
+            'pelanggan' => $pelanggan,
+            'meja' => $meja
         ]);
     }
 
@@ -55,13 +72,15 @@ class OrderController extends Controller
                 'jumlah' => 'required|numeric'
             ]);
 
+            // Remove Auth check and replace with your user logic if needed
             Pesanan::create([
                 'id_pesanan' => $request->id_pesanan,
                 'id_menu' => $request->id_menu,
                 'id_pelanggan' => $request->id_pelanggan,
                 'id_meja' => $request->id_meja,
                 'jumlah' => $request->jumlah,
-                'id_user' => auth()->id()
+                // Remove or modify this line based on how you handle user IDs
+                // 'id_user' => $userId
             ]);
             
             return redirect()->back()->with('success', 'Pesanan berhasil ditambahkan');
@@ -76,11 +95,16 @@ class OrderController extends Controller
         $pesanan = Pesanan::find($id_pesanan);
         $menu = Menu::all();
         $data_pesanan = Pesanan::paginate(10);
+        $pelanggan = DB::table('pelanggan')->get();
+        $meja = DB::table('meja')->get();
 
         return view('entri_order', [
             'pesanan' => $data_pesanan,
-            'editp' => $pesanan,
-            'menu' => $menu
+            'edit' => true,
+            'editb' => $pesanan,
+            'menu' => $menu,
+            'pelanggan' => $pelanggan,
+            'meja' => $meja
         ]);
     }
 

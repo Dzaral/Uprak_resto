@@ -25,7 +25,7 @@
                 @endif
             </header>
             <div class="p-6">
-            <form action="{{ route('pesanan.store') }}" method="POST">
+            <form action="" method="POST">
                     @csrf
                     <div class="mb-6">
                         <label for="id_pesanan" class="block mb-2 text-sm font-medium text-gray-300">ID Pesanan</label>
@@ -43,12 +43,26 @@
                         </select>
                     </div>
                     <div class="mb-6">
-                        <label for="id_pelanggan" class="block mb-2 text-sm font-medium text-gray-300">ID Pelanggan</label>
-                        <input type="text" id="id_pelanggan" name="id_pelanggan" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ isset($edit) ? $editb->id_pelanggan : '' }}" required>
+                        <label for="id_pelanggan" class="block mb-2 text-sm font-medium text-gray-300">Pelanggan</label>
+                        <select id="id_pelanggan" name="id_pelanggan" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <option value="">Pilih Pelanggan</option>
+                            @foreach($pelanggan as $pl)
+                                <option value="{{ $pl->id_pelanggan }}" {{ isset($edit) && $editb->id_pelanggan == $pl->id_pelanggan ? 'selected' : '' }}>
+                                    {{ $pl->nama_pelanggan }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-6">
                         <label for="id_meja" class="block mb-2 text-sm font-medium text-gray-300">No Meja</label>
-                        <input type="text" id="id_meja" name="id_meja" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ isset($edit) ? $editb->id_meja : '' }}" required>
+                        <select id="id_meja" name="id_meja" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <option value="">Pilih Meja</option>
+                            @foreach($meja as $mj)
+                                <option value="{{ $mj->id_meja }}" {{ isset($edit) && $editb->id_meja == $mj->id_meja ? 'selected' : '' }}>
+                                    {{ $mj->no_meja }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-6">
                         <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-300">Jumlah</label>
